@@ -1,0 +1,12 @@
+on: [push]
+jobs:
+  commit_linter_job:
+    runs-on: ubuntu-latest
+    name: A job to lint the current commit of the branch
+    steps:
+      - name: Commit Linter Action
+        id: lintResult
+        uses: Rxinui/commitlinter@v1.1
+      # Use the output from the `hello` step
+      - name: Get the output lint result
+        run: echo "${{ steps.lintResult.outputs.lintResult }}"

@@ -1,8 +1,8 @@
 name: 'Commit Linter'
 description: 'Lint git commit according to @Rxinui format defined here https://kidr.atlassian.net/wiki/spaces/PFEDOJOPLA/pages/229378/How-to+write+a+valid+commit'
 outputs:
-  lint-result: # id of output
+  lintResult: # id of output
     description: 'The result report of commit linter'
 runs:
-  using: 'node17'
+  using: node16
   main: 'index.js'
