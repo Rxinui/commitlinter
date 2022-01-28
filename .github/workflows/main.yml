@@ -6,7 +6,7 @@ jobs:
     steps:
       - name: Commit Linter Action
         id: lintResult
-        uses: Rxinui/commitlinter@v1.2
-      # Use the output from the `hello` step
-      - name: Get the output lint result
-        run: echo "${{ steps.lintResult.outputs.lintResult }}"
+        uses: Rxinui/commitlinter@v1.0
+        with:
+          commitTags: "new,fix,doc,ref,wip"
+          commitIssueId: "LINT"
