@@ -1,7 +1,3 @@
-const __commitConf = require("./config.json");
-const commitTags = __commitConf.tags;
-const commitIssueId = __commitConf.issueId;
-
 module.exports.PASSED = 0;
 
 module.exports.ERROR_MISSING_HEADLINE = 2000;
@@ -54,7 +50,7 @@ module.exports.LintResult = function (...args) {
     return result;
 };
 
-module.exports.lintHeadline = function (commitLines) {
+module.exports.lintHeadline = function (commitLines, commitTags, commitIssueId) {
     /**
      * Analyse commit headline on line#0
      * 
@@ -84,7 +80,7 @@ module.exports.lintHeadline = function (commitLines) {
     return this.LintResult(...lintMessages);
 }
 
-module.exports.lintHeadlineNewline = function (commitLines) {
+module.exports.lintHeadlineNewline = function (commitLines, commitTags, commitIssueId) {
     /**
      * Analyse commit headline newline on line#1
      * 
@@ -104,7 +100,7 @@ module.exports.lintHeadlineNewline = function (commitLines) {
     return this.LintResult(...lintMessages);
 }
 
-module.exports.lintIssueNumber = function (commitLines) {
+module.exports.lintIssueNumber = function (commitLines, commitTags, commitIssueId) {
     /**
      * Analyse commit issue number on line#2
      * 
@@ -136,7 +132,7 @@ module.exports.lintIssueNumber = function (commitLines) {
     return this.LintResult(...lintMessages)
 }
 
-module.exports.lintDescriptionBody = function (commitLines) {
+module.exports.lintDescriptionBody = function (commitLines, commitTags, commitIssueId) {
     /**
      * Analyse commit descriptions starting from line#3 to line#end
      * 
@@ -157,7 +153,7 @@ module.exports.lintDescriptionBody = function (commitLines) {
     return this.LintResult(...lintMessages);
 }
 
-module.exports.lint = function (commitLines) {
+module.exports.lint = function (commitLines, commitTags = [], commitIssueId = "") {
     /**
      * Apply all lint analysis on commit
      * 
@@ -174,13 +170,13 @@ module.exports.lint = function (commitLines) {
     let commitResult = this.LintResult();
     commitResult.commit = commitLines.join("\n");
     let tmp = {};
-    tmp = this.lintHeadline(commitLines);
+    tmp = this.lintHeadline(commitLines, commitTags, commitIssueId);
     updateResult(commitResult, tmp);
-    tmp = this.lintHeadlineNewline(commitLines);
+    tmp = this.lintHeadlineNewline(commitLines, commitTags, commitIssueId);
     updateResult(commitResult, tmp);
-    tmp = this.lintIssueNumber(commitLines);
+    tmp = this.lintIssueNumber(commitLines, commitTags, commitIssueId);
     updateResult(commitResult, tmp);
-    tmp = this.lintDescriptionBody(commitLines);
+    tmp = this.lintDescriptionBody(commitLines, commitTags, commitIssueId);
     updateResult(commitResult, tmp);
     if (commitResult.codes.reduce((acc, code) => acc + code, 0) === 0)
         commitResult.state = "passed";

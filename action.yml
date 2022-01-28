@@ -1,5 +1,12 @@
 name: 'Commit Linter'
 description: 'Lint git commit according to @Rxinui format defined here https://kidr.atlassian.net/wiki/spaces/PFEDOJOPLA/pages/229378/How-to+write+a+valid+commit'
+inputs:
+  commitTags:
+    description: "Commit valid tags"
+    required: true
+  commitIssueId:
+    description: "Commit valid issue id"
+    required: true
 outputs:
   lintResult: # id of output
     description: 'The result report of commit linter'
