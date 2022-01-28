@@ -4,5 +4,5 @@ outputs:
   lintResult: # id of output
     description: 'The result report of commit linter'
 runs:
-  using: node16
+  using: 'node16'
   main: 'index.js'
