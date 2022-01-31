@@ -1,4 +1,4 @@
-on: [push]
+on: [push, pull_request]
 jobs:
   commit_linter_job:
     runs-on: ubuntu-latest
@@ -6,7 +6,8 @@ jobs:
     steps:
       - name: Commit Linter Action
         id: lintResult
-        uses: Rxinui/commitlinter@v1.0
+        uses: Rxinui/commitlinter@develop
         with:
+          # commitMessage:
           commitTags: "new,fix,doc,ref,wip"
           commitIssueId: "LINT"
