@@ -9,8 +9,7 @@ function main() {
         core.info("DEBUG: point 1.1");
         const commitIssueId = core.getInput('commitIssueId');
         core.info("DEBUG: point 1.2");
-        core.info(github.context.payload);
-        core.info(github.context.payload.commits[0]);
+        core.info(JSON.stringify(github.context.payload));
         const cmdGetGitCommit = github.context.payload.head_commit.message;
         core.info("DEBUG: point 1.3");
         core.info("DEBUG: point 2");
