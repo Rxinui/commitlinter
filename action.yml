@@ -1,6 +1,9 @@
 name: 'Commit Linter'
 description: 'Lint git commit according to @Rxinui format defined here https://kidr.atlassian.net/wiki/spaces/PFEDOJOPLA/pages/229378/How-to+write+a+valid+commit'
 inputs:
+  # commitMessage:
+  #   description: "Commit body content to lint"
+  #   required: true
   commitTags:
     description: "Commit valid tags"
     required: true
