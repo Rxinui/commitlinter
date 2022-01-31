@@ -1,4 +1,4 @@
-on: [push]
+on: [push, pull_request]
 jobs:
   commit_linter_job:
     runs-on: ubuntu-latest
