@@ -6,9 +6,17 @@ function main() {
     try {
         const commitTags = core.getInput('commitTags').split(",");
         const commitIssueId = core.getInput('commitIssueId');
-        const cmdGetGitCommit = github.context.payload.head_commit.message;
-        core.info(`info: Checking HEAD commit of '${github.context.ref}'`)
-        const commitLines = cmdGetGitCommit.trimEnd().split("\n");
+        core.info(`info: Checking newest commit of '${github.context.ref}' triggered by '${github.context.eventName}'`)
+        let commit;
+        if (github.context.eventName === GITHUB_EVENT_PULL_REQUEST){
+            commit = `${github.context.payload.pull_request.title}\n\n${github.context.payload.pull_request.body}`
+        } else if (github.context.eventName === GITHUB_EVENT_PUSH) {
+            commit = github.context.payload.head_commit.message
+        } else {
+            throw Error(`Commitlinter does not work on event '${github.context.eventName}'`)
+        }
+        const commitLines = commit.trimEnd().split("\n")
+        core.info(`info: commitLines ${commitLines}`)
         const lintResult = commitlint.lint(commitLines, commitTags, commitIssueId);
         const lintResultJson = JSON.stringify(lintResult, null, 4);
         core.setOutput("lint-result", lintResult)
