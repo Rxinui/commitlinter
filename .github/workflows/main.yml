@@ -6,7 +6,7 @@ jobs:
     steps:
       - name: Commit Linter Action
         id: lintResult
-        uses: Rxinui/commitlinter@v1.0
+        uses: Rxinui/commitlinter@main
         with:
           commitTags: "new,fix,doc,ref,wip"
           commitIssueId: "LINT"
