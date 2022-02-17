@@ -2,6 +2,9 @@ const core = require('@actions/core');
 const github = require('@actions/github');
 const commitlint = require("./commitlint");
 
+const GITHUB_EVENT_PULL_REQUEST = "pull_request"
+const GITHUB_EVENT_PUSH = "push"
+
 function main() {
     try {
         const commitTags = core.getInput('commitTags').split(",");
@@ -24,7 +27,7 @@ function main() {
             core.setFailed(lintResultJson)
         core.info(lintResultJson);
     } catch (error) {
-        core.setFailed(error.message);
+        core.setFailed(error.toString());
     }
 }
 
