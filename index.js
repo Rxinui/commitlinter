@@ -9,6 +9,7 @@ async function main() {
         const commitIssueId = core.getInput('commitIssueId');
         const urlApiCommit = github.context.payload.repository.commits_url;
         const urlCommitMessage = urlApiCommit.replace("{/sha}", `/${github.context.payload.after}`);
+        core.info(JSON.stringify(github.context, null, 4))
         core.info(`info: Checking newest commit of '${github.context.ref}'`)
         let response = await axios.get(urlCommitMessage);
         const commitLines = response.data.commit.message.trimEnd().split("\n")
