@@ -2,6 +2,7 @@
 
 Personal git commit linter for GitHub action following [Rxinui commit format](https://kidr.atlassian.net/wiki/spaces/PFEDOJOPLA/pages/229378/How-to+write+a+valid+commit)
 
+
 ## Usage on GitHub Action
 
 ```yaml
