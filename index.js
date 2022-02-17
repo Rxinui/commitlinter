@@ -2,6 +2,9 @@ const core = require('@actions/core');
 const github = require('@actions/github');
 const commitlint = require("./commitlint");
 
+const GITHUB_EVENT_PULL_REQUEST = "pull_request"
+const GITHUB_EVENT_PUSH = "push"
+
 function main() {
     try {
         const commitTags = core.getInput('commitTags').split(",");
@@ -16,7 +19,6 @@ function main() {
             throw Error(`Commitlinter does not work on event '${github.context.eventName}'`)
         }
         const commitLines = commit.trimEnd().split("\n")
-        core.info(`info: commitLines ${commitLines}`)
         const lintResult = commitlint.lint(commitLines, commitTags, commitIssueId);
         const lintResultJson = JSON.stringify(lintResult, null, 4);
         core.setOutput("lint-result", lintResult)

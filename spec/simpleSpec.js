@@ -72,6 +72,15 @@ describe("Test lint issue number:", function () {
         expect(commitlint.lintIssueNumber(testcase, commitTags, commitIssueId).codes).toContain(commitlint.PASSED);
     });
 
+    it("Valid issue number with smart commit", function () {
+        testcaseSmartCommit =
+            `new: VBoxManageList commands work with API
+
+[PFE-4] #review-task #comment using smart commit
+testing smart commit integration with Jira`.split("\n");
+        expect(commitlint.lintIssueNumber(testcaseSmartCommit, commitTags, commitIssueId).codes).toContain(commitlint.PASSED);
+    });
+
     it("Bad: Missing issue number", function () {
         const badTestCase =
             `new: VBoxManageList commands work with API
