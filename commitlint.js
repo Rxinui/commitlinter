@@ -114,7 +114,7 @@ module.exports.lintIssueNumber = function (commitLines, commitTags, commitIssueI
         const issueId = commitLines[2].trimEnd();
         const regexEmpty = /^\s*$/;
         const regexNoOpenBracket = /^\[/;
-        const regexNoCloseBracket = /\]$/;
+        const regexNoCloseBracket = /\]([\w\s#]*)$/;
         const regexIssueNumber = /\w+\-\d+/
         if (regexEmpty.test(issueId))
             lintMessages.push(this.LintMessage(this.ERROR_MISSING_ISSUE, `error: missing issue id after headline summary.`));
@@ -126,6 +126,7 @@ module.exports.lintIssueNumber = function (commitLines, commitTags, commitIssueI
             lintMessages.push(this.LintMessage(this.ERROR_MISSING_ISSUE_NUMBER, `error: issue id '${commitIssueId}' must be followed by a number before closing the bracket.`));
         if (!regexNoCloseBracket.test(issueId))
             lintMessages.push(this.LintMessage(this.ERROR_MISSING_ISSUE_CLOSE_BRACKET, `error: missing ']' at the beginning of the issue number.`));
+        
         if (lintMessages.length === 0)
             lintMessages.push(this.LintMessage(this.PASSED, `passed: commit issue number is OK.`));
     }
