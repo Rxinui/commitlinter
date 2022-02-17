@@ -24,7 +24,7 @@ function main() {
             core.setFailed(lintResultJson)
         core.info(lintResultJson);
     } catch (error) {
-        core.setFailed(error.message);
+        core.setFailed(error.toString());
     }
 }
 
