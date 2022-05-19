@@ -12,7 +12,7 @@ function main() {
         core.info(`info: Checking newest commit of '${github.context.ref}' triggered by '${github.context.eventName}'`)
         let commit;
         if (github.context.eventName === GITHUB_EVENT_PULL_REQUEST){
-            core.debug(JSON.stringify(github.context.payload, null, 2))
+            core.info(JSON.stringify(github.context.payload, null, 3))
             commit = `${github.context.payload.pull_request.title}\n\n${github.context.payload.pull_request.body}`
         } else if (github.context.eventName === GITHUB_EVENT_PUSH) {
             commit = github.context.payload.head_commit.message
